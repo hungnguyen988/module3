@@ -38,3 +38,4 @@ update student set name = "minh" where id = 3;
 
 delete from student where id = 2;
 
+
