@@ -107,4 +107,71 @@ insert into student (name,birth,email,point,jame_username,class_id)
  update student
  set email = 'kylx@gmmail.com' where id = 9;
  
+ update class
+ set name = 'c1221g1' where id =2 ;
  
+select student.name,student.gender,student.birth,student.point,student.email,class.name
+ from student
+ inner join class
+ on student.class_id = class.id;
+ 
+select student.name,student.gender,student.birth,student.point,student.email,class.name
+ from student
+ left join class
+ on student.class_id = class.id;
+ 
+select student.name,student.gender,student.birth,student.point,student.email,class.name
+ from student
+ inner join class
+ on student.class_id = class.id
+ where student.name = 'nguyen minh hai';
+ 
+select student.name,student.gender,student.birth,student.point,student.email,class.name
+ from student
+ inner join class
+ on student.class_id = class.id
+ where student.name like 'nguyen%';
+ 
+ select student.name,student.gender,student.birth,student.point,student.email,class.name
+ from student
+ inner join class
+ on student.class_id = class.id
+ where student.name like '%hai' 
+ or student.name like '%huynh';
+ 
+ select student.name,student.gender,student.birth,student.point,student.email,class.name
+ from student
+ inner join class
+ on student.class_id = class.id
+ where student.point > 5;
+ 
+ 
+  select student.name,student.gender,student.birth,student.point,student.email,class.name
+ from student
+ inner join class
+ on student.class_id = class.id
+ where student.point =4
+ or student.point =6
+ or student.point =8;
+ 
+ select student.point, count(*) as student_count
+ from student
+ group by student.point;
+ 
+ select student.point, count(*) as student_count
+ from student
+ where student.point >5
+ group by student.point;
+ 
+ select student.point, count(*) as student_count
+ from student
+ where student.point >5
+ group by student.point
+ having student_count >=2;
+ 
+ select student.name,student.gender,student.birth,student.point,student.email,class.name
+ from student
+ inner join class
+ on student.class_id = class.id
+ where class.name = 'c1121g1'
+ order by student.point desc;
