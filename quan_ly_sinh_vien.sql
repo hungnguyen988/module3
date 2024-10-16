@@ -88,8 +88,23 @@ set sql_safe_updates = 1;
 
 select student.name,`subject`.name,mark.mark
 from mark
-right join  `subject` on subject.id = mark.subject_id
-right join student on student.id = mark.student_id
+ join  `subject` on subject.id = mark.subject_id
+join student on student.id = mark.student_id
 order by mark.mark desc , student.name asc; 
 
+select `subject`.name,mark.mark
+from mark
+right join  `subject` on subject.id = mark.subject_id;
 
+select student.name,mark.mark
+from mark
+right join student on student.id = mark.student_id;
+ 
+select student.name,`subject`.name,mark.mark
+from mark
+right join  `subject` on subject.id = mark.subject_id
+right join student on student.id = mark.student_id
+;
+
+ insert into student(name,address,phone,status,class_id)
+ values('phuong','da nang','0123456789',1,3);
