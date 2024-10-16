@@ -66,45 +66,37 @@ values(1,1,8,1),
 (1,2,10,2),
 (2,1,12,1);
 
+-- Hiển thị tất cả các sinh viên có tên bắt đầu bảng ký tự ‘h’
 select * 
 from student
 where student.name like 'h%';
 
+
+-- Hiển thị các thông tin lớp học có thời gian bắt đầu vào tháng 12.
 select * 
 from class 
 where class.start_date like '%-12-%';
 
+
+-- Hiển thị tất cả các thông tin môn học có credit trong khoảng từ 3-5.
 select *
 from `subject`
 where `subject`.credit between 3 and 5;
 
-set sql_safe_updates = 0;
 
+-- Thay đổi mã lớp(ClassID) của sinh viên có tên ‘Hung’ là 2.
+set sql_safe_updates = 0;
 update student
 set class_id = 2
 where name = 'hung';
-
 set sql_safe_updates = 1;
 
+
+
+-- Hiển thị các thông tin: StudentName, SubName, Mark. Dữ liệu sắp xếp theo điểm thi (mark) giảm dần. nếu trùng sắp theo tên tăng dần.
 select student.name,`subject`.name,mark.mark
 from mark
- join  `subject` on subject.id = mark.subject_id
+join  `subject` on subject.id = mark.subject_id
 join student on student.id = mark.student_id
 order by mark.mark desc , student.name asc; 
 
-select `subject`.name,mark.mark
-from mark
-right join  `subject` on subject.id = mark.subject_id;
-
-select student.name,mark.mark
-from mark
-right join student on student.id = mark.student_id;
- 
-select student.name,`subject`.name,mark.mark
-from mark
-right join  `subject` on subject.id = mark.subject_id
-right join student on student.id = mark.student_id
-;
-
- insert into student(name,address,phone,status,class_id)
- values('phuong','da nang','0123456789',1,3);
