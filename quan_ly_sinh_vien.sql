@@ -57,6 +57,10 @@ values('hung','ha noi','0912113113',1,1),
 ('hoa','hai phong',null,1,1),
 ('manh','hcm','0123123123',0,2);
 
+insert into student(name, address,phone,status,class_id)
+values('luu','hai phong','0987654321',1,2),
+('minh','ha noi','0987123123',1,1);
+
 
 alter table mark 
 add column exam_time tinyint default 1;
@@ -99,4 +103,36 @@ from mark
 join  `subject` on subject.id = mark.subject_id
 join student on student.id = mark.student_id
 order by mark.mark desc , student.name asc; 
+
+
+
+-- Hiển thị số lượng sinh viên ở từng nơi
+select address,count(address) as quantity
+from student
+group by address;
+
+
+-- Tính điểm trung bình các môn học của mỗi học viên
+
+select student.name,student.id,avg(mark)
+from student
+join mark on student.id = mark.student_id
+group by student.id;
+
+
+-- Hiển thị những bạn học viên co điểm trung bình các môn học lớn hơn 15
+
+select student.name,student.id,avg(mark) as avg_mark
+from student
+join mark on student.id = mark.student_id
+group by student.id
+having avg_mark > 15;
+
+-- Hiển thị thông tin các học viên có điểm trung bình lớn nhất.
+
+select student.id,student.name,avg(mark) as avg_mark
+from student
+join mark on student.id = mark.student_id
+group by student.id
+having avg_mark >= all(select avg(mark) from mark group by mark.student_id);
 

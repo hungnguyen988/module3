@@ -86,5 +86,5 @@ select o.id,o.date_order,sum(p.price*od.quantity) as total_money
 from `order` o
 join order_detail od on o.id = od.order_id
 join product p on p.id = od.product_id
-group by o.id,o.date_order;
+group by o.id;
 

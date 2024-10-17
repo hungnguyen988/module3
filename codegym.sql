@@ -175,3 +175,53 @@ select student.name,student.gender,student.birth,student.point,student.email,cla
  on student.class_id = class.id
  where class.name = 'c1121g1'
  order by student.point desc;
+ 
+-- Hiện thị danh sách các lớp có học viên theo học và số lượng học viên của mỗi lớp
+ select class.name,count(student.class_id) as total_student
+ from class
+ join student
+ on student.class_id = class.id
+ group by class.id,class.name;
+     
+-- Tính điểm lớn nhất của mỗi các lớp
+  select class.name,max(student.point) as max_point
+  from class
+  left join student 
+  on class.id = student.class_id
+  group by class.id,class.name;
+  
+     
+-- Tình điểm trung bình  của từng lớp
+select class.name,avg(student.point) as avg_point
+  from class
+  left join student 
+  on class.id = student.class_id
+  group by class.id,class.name;
+
+
+-- Lấy ra toàn bộ tên và ngày sinh các instructor và student ở CodeGym.
+select name,birth
+from instructor
+union all
+select name,birth
+from student;
+
+-- Lấy ra top 3 học viên có điểm cao nhất của trung tâm.
+select *
+from student
+order by student.point desc
+limit 3;
+
+
+-- Lấy ra các học viên có điểm số là cao nhất của trung tâm.
+select *
+from student
+where student.point =(select max(student.point) from student);
+
+-- lấy ra tất cả các giảng viên chưa từng tham gia giảng dạy
+
+select *
+from instructor
+left join instructor_class 
+on instructor.id = instructor_class.instructor_id
+where instructor_class.class_id is null;
