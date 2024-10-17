@@ -136,3 +136,22 @@ join mark on student.id = mark.student_id
 group by student.id
 having avg_mark >= all(select avg(mark) from mark group by mark.student_id);
 
+-- Hiển thị tất cả các thông tin môn học (bảng subject) có credit lớn nhất.
+select *
+from subject
+where credit = (select max(credit) from subject);
+
+-- Hiển thị các thông tin môn học có điểm thi lớn nhất.
+select subject.id,subject.name,subject.credit,subject.status
+from subject
+join mark on subject.id = mark.subject_id
+where mark = (select max(mark) from mark);
+
+-- Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, xếp hạng theo thứ tự điểm giảm dần
+
+select *
+from student
+left join mark on student.id = mark.student_id
+group by student.id
+order by mark.mark desc;
+
