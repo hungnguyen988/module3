@@ -69,7 +69,7 @@ from `order`
 join customer on customer.id = `order`.customer_id
 join order_detail on `order`.id = order_detail.order_id
 join product on product.id = order_detail.product_id
-group by customer.name,product.name
+group by customer.id,product.name
 order by customer.name asc
 ;
 
