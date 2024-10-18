@@ -283,7 +283,19 @@ group by dv.ma;
  group by hd.ma_dich_vu;
  
  -- 8.	Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau
- 
+ -- Cách 1:
  select khach_hang.ho_ten
  from khach_hang 
  group by khach_hang.ho_ten;
+ 
+ -- Cách 2:
+ select distinct khach_hang.ho_ten
+ from khach_hang;
+ 
+ -- Cách 3:
+ select kh.ho_ten
+ from khach_hang kh
+ where not exists
+ (select 1 from khach_hang kh2 
+ where kh.ho_ten = kh2.ho_ten
+ and kh2.ma <kh.ma);
