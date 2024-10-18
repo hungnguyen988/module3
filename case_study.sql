@@ -299,3 +299,77 @@ group by dv.ma;
  (select 1 from khach_hang kh2 
  where kh.ho_ten = kh2.ho_ten
  and kh2.ma <kh.ma);
+ 
+ -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021 
+ -- thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
+-- Cách 1:
+ select '01' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-01-%' 
+ having so_lan >0 
+ union all
+ select '02' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-02%'
+ having so_lan >0 
+  union all
+ select '03' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-03%'
+ having so_lan >0 
+  union all
+ select '04' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-04%'
+ having so_lan >0 
+  union all
+ select '05' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-05%'
+ having so_lan >0 
+  union all
+ select '06' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-06%'
+ having so_lan >0 
+  union all
+ select '07' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-07%'
+ having so_lan >0 
+  union all
+ select '08' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-08%'
+ having so_lan >0 
+  union all
+ select '09' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-09%'
+ having so_lan >0 
+  union all
+ select '10' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-10%'
+ having so_lan >0 
+  union all
+ select '11' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-11%'
+ having so_lan >0 
+  union all
+ select '12' as thang,count(ngay_lam_hop_dong) as so_lan
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-12%'
+ having so_lan >0 
+;
+-- Cách 2
+ select   month(ngay_lam_hop_dong) , count(month(ngay_lam_hop_dong))
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-%' 
+ group by month(ngay_lam_hop_dong)
+ order by ngay_lam_hop_dong asc;
+ 
+ 
+ 
+ 
