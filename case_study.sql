@@ -250,7 +250,7 @@ left join dich_vu_di_kem dvdk on dvdk.ma = hdct.ma_dich_vu_di_kem
 group by kh.ma,kh.ho_ten,lk.ten,hd.ma,dv.ten,hd.ngay_lam_hop_dong,hd.ngay_ket_thuc; 
 
 
--- Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu của tất cả các loại dịch vụ chưa từng được khách hàng thực hiện đặt từ quý 1 của năm 2021 (Quý 1 là tháng 1, 2, 3).
+-- 6.Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu của tất cả các loại dịch vụ chưa từng được khách hàng thực hiện đặt từ quý 1 của năm 2021 (Quý 1 là tháng 1, 2, 3).
 
 select dv.ma,dv.ten,dv.dien_tich,dv.chi_phi_thue,ldv.ten,hd.ngay_lam_hop_dong
 from dich_vu dv
@@ -266,3 +266,20 @@ WHERE NOT EXISTS (
 )
 group by dv.ma;
  
+ 
+ -- 7.	Hiển thị thông tin ma_dich_vu, ten_dich_vu, dien_tich, so_nguoi_toi_da, chi_phi_thue, ten_loai_dich_vu
+ -- của tất cả các loại dịch vụ đã từng được khách hàng đặt phòng trong năm 2020 nhưng 
+ -- chưa từng được khách hàng đặt phòng trong năm 2021.
+ 
+ select dv.ma,dv.ten,dv.dien_tich,dv.so_nguoi_toi_da,dv.chi_phi_thue,ldv.ten
+ from hop_dong hd
+ join dich_vu dv on dv.ma = hd.ma_dich_vu
+ join loai_dich_vu ldv on ldv.ma = dv.ma_loai_dich_vu
+ where ngay_lam_hop_dong like '2020-%'
+ and hd.ma_dich_vu not  in(
+ select hd.ma_dich_vu
+ from hop_dong hd
+ where ngay_lam_hop_dong like '2021-%')
+ group by hd.ma_dich_vu;
+ 
+ -- 8.	Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau
