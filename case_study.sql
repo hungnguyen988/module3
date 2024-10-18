@@ -254,12 +254,15 @@ group by kh.ma,kh.ho_ten,lk.ten,hd.ma,dv.ten,hd.ngay_lam_hop_dong,hd.ngay_ket_th
 
 select dv.ma,dv.ten,dv.dien_tich,dv.chi_phi_thue,ldv.ten,hd.ngay_lam_hop_dong
 from dich_vu dv
-left join hop_dong hd on hd.ma_dich_vu = dv.ma 
+left join hop_dong hd on hd.ma_dich_vu = dv.ma
 left join loai_dich_vu ldv on dv.ma_loai_dich_vu = ldv.ma 
-where not exists ( SELECT 1
-    FROM hop_dong sub_hd
-    WHERE sub_hd.ma_dich_vu = dv.ma
-    AND sub_hd.ngay_lam_hop_dong >= '2021-01-01')
-
- -- where hd.ngay_lam_hop_dong >= '2021-01-01'
--- group by dv.ma,dv.ten,dv.dien_tich,dv.chi_phi_thue,ldv.ten,hd.ngay_lam_hop_dong;
+WHERE NOT EXISTS (
+    SELECT 1 
+    FROM hop_dong hd_sub 
+    WHERE hd_sub.ma_dich_vu = dv.ma 
+    AND (hd_sub.ngay_lam_hop_dong like '2021-01-%'
+    or hd_sub.ngay_lam_hop_dong like '2021-02-%'
+    or hd_sub.ngay_lam_hop_dong like '2021-03-%')
+)
+group by dv.ma;
+ 
