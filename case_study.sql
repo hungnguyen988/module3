@@ -260,9 +260,8 @@ WHERE NOT EXISTS (
     SELECT 1 
     FROM hop_dong hd_sub 
     WHERE hd_sub.ma_dich_vu = dv.ma 
-    AND (hd_sub.ngay_lam_hop_dong like '2021-01-%'
-    or hd_sub.ngay_lam_hop_dong like '2021-02-%'
-    or hd_sub.ngay_lam_hop_dong like '2021-03-%')
+    AND (hd_sub.ngay_lam_hop_dong between '2021-01-01' and '2021-03-31'
+    )
 )
 group by dv.ma;
  
@@ -275,11 +274,11 @@ group by dv.ma;
  from hop_dong hd
  join dich_vu dv on dv.ma = hd.ma_dich_vu
  join loai_dich_vu ldv on ldv.ma = dv.ma_loai_dich_vu
- where ngay_lam_hop_dong like '2020-%'
+ where year(ngay_lam_hop_dong) = 2020
  and hd.ma_dich_vu not  in(
  select hd.ma_dich_vu
  from hop_dong hd
- where ngay_lam_hop_dong like '2021-%')
+ where year(ngay_lam_hop_dong) = 2021)
  group by hd.ma_dich_vu;
  
  -- 8.	Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau
@@ -366,7 +365,7 @@ group by dv.ma;
 -- Cách 2
  select   month(ngay_lam_hop_dong) , count(month(ngay_lam_hop_dong))
  from hop_dong hd
- where ngay_lam_hop_dong like '2021-%' 
+ where year(ngay_lam_hop_dong) = 2021 
  group by month(ngay_lam_hop_dong)
  order by ngay_lam_hop_dong asc;
  
