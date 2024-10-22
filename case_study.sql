@@ -396,7 +396,14 @@ select nv.*
 from nhan_vien nv
 join hop_dong hd on hd.ma_nhan_vien = nv.ma
 where dia_chi like '%Đà Nẵng'
-and hd.ngay_lam_hop_dong like '2021-04-25%'
+and hd.ngay_lam_hop_dong like '2021-04-25%';
+
+-- 22.	Thông qua khung nhìn v_nhan_vien thực hiện cập nhật địa chỉ thành “Liên Chiểu” 
+-- đối với tất cả các nhân viên được nhìn thấy bởi khung nhìn này.
+-- (cách này chỉ áp dụng cho updatable view , còn nếu là non-updatable view thì chỉ có thể cập nhật trực tiếp vào bảng nhân viên)
+update nhan_vien 
+set dia_chi = '22 Nguyễn Lương Bằng, Đà Nẵng'
+where ma in(select ma from v_nhan_vien);
 
 
 
