@@ -386,3 +386,19 @@ group by hd.ma ;
 union
 select kh.ma,kh.ho_ten,kh.email,kh.so_dien_thoai,kh.ngay_sinh,kh.dia_chi
 from khach_hang kh;
+
+-- 21.	Tạo khung nhìn có tên là v_nhan_vien để lấy được thông tin của tất cả các nhân viên có địa chỉ là “Đà Nẵng” 
+-- và đã từng lập hợp đồng cho một hoặc nhiều khách hàng bất kì với ngày lập hợp đồng là “25/04/2021”.
+
+create view v_nhan_vien 
+as
+select nv.*
+from nhan_vien nv
+join hop_dong hd on hd.ma_nhan_vien = nv.ma
+where dia_chi like '%Đà Nẵng'
+and hd.ngay_lam_hop_dong like '2021-04-25%'
+
+
+
+
+ 
