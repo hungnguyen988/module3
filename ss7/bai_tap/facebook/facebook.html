@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Layout</title>
+    <style>
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4267B2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 240px;
+            height: 100%;
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #333;
+            padding: 10px;
+            text-decoration: none;
+            margin-bottom: 10px;
+            background-color: #ddd;
+            text-align: center;
+        }
+
+        .sidebar a:hover {
+            background-color: #ccc;
+        }
+
+        .main-content {
+            margin-left: 220px;
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        .post {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>Facebook</h2>
+</div>
+
+<div class="sidebar">
+    <a href="#">Home</a>
+    <a href="#">Friends</a>
+    <a href="#">Messages</a>
+    <a href="#">Notifications</a>
+</div>
+
+<div class="main-content">
+    <div class="post">
+        <h3>Post Title 1</h3>
+        <p>This is a sample post content. You can add multiple posts in this section.</p>
+    </div>
+    <div class="post">
+        <h3>Post Title 2</h3>
+        <p>Another post content for testing the layout.</p>
+    </div>
+</div>
+
+</body>
+</html>
