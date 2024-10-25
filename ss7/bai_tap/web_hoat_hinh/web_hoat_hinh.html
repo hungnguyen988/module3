@@ -12,10 +12,11 @@
             flex-direction: column;
             min-height: 100vh;
         }
+
         header {
             background-color: #333;
             color: #fff;
-            padding: 10px;
+            padding: 0 10px 30px 10px;
             display: inline-flex;
             justify-content: space-between;
             position: fixed; /* Giữ cố định header */
@@ -24,51 +25,79 @@
             right: 0;
             z-index: 1000; /* Đảm bảo header ở trên cùng */
         }
+
         .head-link {
             margin-left: 20px;
+            padding-top: 20px;
         }
+
         .head-link ul {
             list-style-type: none;
             padding: 0;
             display: flex;
         }
+
         .head-link ul li {
             margin-right: 20px;
         }
+
         .head-link ul li a {
             color: #fff;
             text-decoration: none;
             font-weight: normal; /* Bỏ gạch chân */
             transition: color 0.3s, font-weight 0.3s; /* Hiệu ứng chuyển màu */
         }
+
         .head-link ul li a:hover {
             color: #ffcc00; /* Màu khi hover */
             font-weight: bold; /* Bôi đậm khi hover */
         }
+
         .logo {
-            margin-left: auto; /* Đẩy logo sang bên phải */
-            margin-right: 50px;
+            background-color: red;
+            width: 120px; /* Chiều rộng khung */
+            height: 50px; /* Chiều cao khung */
+            display: flex; /* Sử dụng Flexbox để căn giữa chữ */
+            justify-content: center; /* Căn giữa ngang */
+            align-items: center; /* Căn giữa dọc */
+            margin-left: auto;
+            margin-right: 20px;
             margin-top: 20px;
+            border-radius: 10%;
+            color: white; /* Màu chữ */
+            font-size: 20px; /* Kích thước chữ */
+            font-weight: bold; /* Làm đậm chữ */
         }
+
+
+        .logo:hover {
+            color: #ffcc00; /* Màu khi hover */
+            font-weight: bold; /* Bôi đậm khi hover */
+        }
+
         .container {
             display: flex;
-            margin-top: 60px; /* Để tránh che khuất bởi header */
+            margin-top: 70px; /* Để tránh che khuất bởi header */
             flex-grow: 1;
         }
+
         .left-content {
             width: 250px;
             background-color: #f2f2f2;
             padding: 20px;
             overflow-y: auto; /* Cuộn nếu nội dung quá dài */
         }
+
         .video-item {
             margin-bottom: 20px; /* Khoảng cách giữa các video */
             cursor: pointer; /* Thay đổi con trỏ khi hover */
         }
+
         .right-content {
             flex-grow: 1;
             padding: 20px;
         }
+
         footer {
             background-color: #333;
             color: #fff;
@@ -76,11 +105,13 @@
             padding: 10px;
             position: relative;
         }
+
         /* Responsive styling */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
             }
+
             .left-content {
                 width: 100%; /* Chiếm toàn bộ chiều rộng trên màn hình nhỏ */
             }
@@ -98,22 +129,27 @@
             <li><a href="#">Contact</a></li>
         </ul>
     </div>
-    <div class="logo">Logo</div>
+    <div class="logo">
+        <p>YOUTUBE</p>
+    </div>
 </header>
 
 <div class="container">
     <aside class="left-content">
         <h2>Video List</h2>
         <div class="video-item" onclick="loadVideo('video1')">
-            <iframe width="100%" height="150" src="https://www.youtube.com/embed/UytA_zVyCMw" frameborder="0" allowfullscreen></iframe>
+            <iframe width="100%" height="150" src="https://www.youtube.com/embed/UytA_zVyCMw" frameborder="0"
+                    allowfullscreen></iframe>
             <p>Video 1 Title</p>
         </div>
         <div class="video-item" onclick="loadVideo('video2')">
-            <iframe width="100%" height="150" src="https://www.youtube.com/embed/5VMyXGCHOwA" frameborder="0" allowfullscreen></iframe>
+            <iframe width="100%" height="150" src="https://www.youtube.com/embed/5VMyXGCHOwA" frameborder="0"
+                    allowfullscreen></iframe>
             <p>Video 2 Title</p>
         </div>
         <div class="video-item" onclick="loadVideo('video3')">
-            <iframe width="100%" height="150" src="https://www.youtube.com/embed/TukFojI3rlQ" frameborder="0" allowfullscreen></iframe>
+            <iframe width="100%" height="150" src="https://www.youtube.com/embed/TukFojI3rlQ" frameborder="0"
+                    allowfullscreen></iframe>
             <p>Video 3 Title</p>
         </div>
     </aside>
@@ -121,7 +157,8 @@
     <main class="right-content">
         <h2>Selected Video</h2>
         <div id="video-player">
-            <iframe id="video-iframe" width="100%" height="315" src="https://www.youtube.com/embed/UytA_zVyCMw" frameborder="0" allowfullscreen></iframe>
+            <iframe id="video-iframe" width="100%" height="315" src="https://www.youtube.com/embed/UytA_zVyCMw"
+                    frameborder="0" allowfullscreen></iframe>
         </div>
         <div id="video-description">
             <p id="description-text">Mô tả về Video 1 ở đây. Video này nói về...</p>

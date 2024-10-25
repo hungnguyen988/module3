@@ -2,9 +2,173 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Landing Page</title>
+  <link rel="stylesheet" href="../../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
+
+
 </head>
-<body>
-$END$
+<body class = "page basicpage">
+
+<!-- Header Section -->
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+<!--  <div class="container">-->
+<!--    <a class="navbar-brand" href="#">Your Brand</a>-->
+<!--    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--      <ul class="navbar-nav ms-auto">-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link active" href="#features">Features</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#testimonials">Testimonials</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#contact">Contact</a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+
+<nav class="navbar navbar-expand-lg bg-info-subtle">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- Hero Section -->
+<section class="bg-primary text-white text-center py-5">
+  <div class="container">
+    <h1>Welcome to Our Service</h1>
+    <p class="lead">Boost your business with our powerful tools</p>
+    <a href="#cta" class="btn btn-light btn-lg">Get Started</a>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-5">
+  <div class="container">
+    <div class="row text-center">
+      <h2>Our Features</h2>
+      <p class="lead">Discover the amazing features we offer</p>
+      <div class="col-md-4">
+        <div class="card p-4">
+          <div class="card-body">
+            <h4 class="card-title">Responsive Design</h4>
+            <p class="card-text">Our website looks great on any device.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4">
+          <div class="card-body">
+            <h4 class="card-title">Secure</h4>
+            <p class="card-text">We ensure the safety of your data.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4">
+          <div class="card-body">
+            <h4 class="card-title">Fast Performance</h4>
+            <p class="card-text">Experience lightning-fast loading speeds.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section id="cta" class="bg-warning text-center py-5">
+  <div class="container">
+    <h2>Ready to Get Started?</h2>
+    <p>Join us today and grow your business.</p>
+    <a href="#" class="btn btn-dark btn-lg">Sign Up Now</a>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-5">
+  <div class="container text-center">
+    <h2>What Our Customers Say</h2>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="card p-4">
+          <blockquote class="blockquote mb-0">
+            <p>"This service has transformed my business!"</p>
+            <footer class="blockquote-footer">Jane Doe</footer>
+          </blockquote>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4">
+          <blockquote class="blockquote mb-0">
+            <p>"Amazing features and outstanding support!"</p>
+            <footer class="blockquote-footer">John Smith</footer>
+          </blockquote>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-4">
+          <blockquote class="blockquote mb-0">
+            <p>"Highly recommend to anyone looking to grow."</p>
+            <footer class="blockquote-footer">Sarah Lee</footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-white py-3">
+  <div class="container text-center">
+    <p>&copy; 2024 Your Brand. All rights reserved.</p>
+    <div>
+      <a href="#" class="text-white mx-2">Privacy Policy</a>
+      <a href="#" class="text-white mx-2">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../../../bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>v
+
 </body>
 </html>
