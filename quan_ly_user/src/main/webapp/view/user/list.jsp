@@ -16,6 +16,7 @@
 </head>
 <body>
 <h1>DANH SÁCH USER</h1>
+<h3>${sessionScope.mess}</h3>
 <table border="1">
     <tr>
         <th>id</th>
@@ -51,6 +52,7 @@
 <a href="/view/user/add.jsp">THÊM USER MỚI</a><br>
 <a href="/view/user/searchForm.jsp">TÌM USER THEO ID</a><br>
 <a href="http://localhost:8080/user?action=sort">SẮP XẾP USER THEO TÊN</a><br>
+<a href="http://localhost:8080/user?action=text-transaction">THÊM VÀ SỬA</a><br>
 
 </body>
 </html>

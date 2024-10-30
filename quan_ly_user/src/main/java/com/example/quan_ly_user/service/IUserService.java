@@ -16,4 +16,6 @@ public interface IUserService {
     boolean updateUser(User user);
 
     List<User> softByUserName();
+
+    String insertUpdateUserTransaction();
 }

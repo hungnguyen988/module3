@@ -3,10 +3,7 @@ package com.example.quan_ly_user.repository;
 import com.example.quan_ly_user.dao.UserDao;
 import com.example.quan_ly_user.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +11,13 @@ public class UserRepository implements IUserRepository {
     UserDao userDao = new UserDao();
 
     private static final String INSERT_USER = "insert into users(name,email,country) values(?,?,?)";
-    private static final String UPDATE_USER = "update users set name =?,email=?,country=? where id =?";
-    private static final String DELETE_USER = "delete from users where id =?";
-    private static final String SELECT_ALL_USERS = "select * from users";
+    private static final String UPDATE_USER = "call update_users(?,?,?,?)";
+    private static final String DELETE_USER = "call delete_users(?)";
+    private static final String SELECT_ALL_USERS = "call get_all_users()";
     private static final String SELECT_USER_BY_ID = "select * from users where id =?";
     private static final String SOFT_BY_NAME = "select * from users order by name,country";
+    private static final String ADD_TRANSACTION = "insert into users(name,email,country) values(?,?,?)";
+    private static final String UPDATE_TRANSACTION = "call update_users(?,?,?,?)";
 
 
     public UserRepository() {
@@ -32,8 +31,8 @@ public class UserRepository implements IUserRepository {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getCountry());
-             statement.executeUpdate();
-        }catch (SQLException e) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -50,10 +49,10 @@ public class UserRepository implements IUserRepository {
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 String country = resultSet.getString("country");
-                user= new User(userId, name, email, country);
+                user = new User(userId, name, email, country);
             }
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
 
         }
@@ -64,7 +63,7 @@ public class UserRepository implements IUserRepository {
     public List<User> selectAllUsers() {
         List<User> users = new ArrayList<>();
         try (Connection connection = userDao.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS);) {
+             CallableStatement statement = connection.prepareCall(SELECT_ALL_USERS)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int userId = resultSet.getInt("id");
@@ -80,29 +79,29 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public boolean deleteUser(int id)  {
+    public boolean deleteUser(int id) {
         try (Connection connection = userDao.getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_USER)) {
+             CallableStatement statement = connection.prepareCall(DELETE_USER)) {
             statement.setInt(1, id);
             int rows = statement.executeUpdate();
             return rows > 0;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
 
     @Override
-    public boolean updateUser(User user)  {
+    public boolean updateUser(User user) {
         try (Connection connection = userDao.getConnection();
-        PreparedStatement statement = connection.prepareStatement(UPDATE_USER)) {
+             CallableStatement statement = connection.prepareCall(UPDATE_USER)) {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getCountry());
             statement.setInt(4, user.getId());
             int rows = statement.executeUpdate();
             return rows > 0;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
@@ -126,4 +125,41 @@ public class UserRepository implements IUserRepository {
         }
         return users;
     }
+
+
+    public String insertUpdateUserTransaction() {
+        String mess = "Transaction failed! No user updated.";
+        try (Connection connection = userDao.getConnection()) {
+            connection.setAutoCommit(false);
+
+            try (PreparedStatement statementAdd = connection.prepareStatement(ADD_TRANSACTION);
+                 PreparedStatement statementUpdate = connection.prepareStatement(UPDATE_TRANSACTION)) {
+
+                statementAdd.setString(1, "John Doe");
+                statementAdd.setString(2, "john.doe@example.com");
+                statementAdd.setString(3, "USA");
+                statementAdd.executeUpdate();
+
+                statementUpdate.setString(1, "Jack");
+                statementUpdate.setString(2, "jack@gmail.com");
+                statementUpdate.setString(3, "France");
+                statementUpdate.setInt(4, 9);
+                statementUpdate.executeUpdate();
+
+
+                connection.commit();
+                mess = "Transaction successful!";
+            } catch (SQLException e) {
+                connection.rollback();
+                e.printStackTrace();
+            }finally {
+                connection.setAutoCommit(true);
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mess;
+    }
+
 }

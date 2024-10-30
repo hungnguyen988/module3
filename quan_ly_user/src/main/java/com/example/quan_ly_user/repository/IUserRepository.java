@@ -16,4 +16,8 @@ public interface IUserRepository {
     boolean updateUser(User user);
 
     List<User> softByUserName();
+
+
+
+    String insertUpdateUserTransaction();
 }

@@ -39,4 +39,11 @@ public class UserService implements IUserService {
     public List<User> softByUserName(){
         return userRepository.softByUserName();
     }
+
+    @Override
+    public String insertUpdateUserTransaction() {
+        return userRepository.insertUpdateUserTransaction();
+    }
+
+
 }

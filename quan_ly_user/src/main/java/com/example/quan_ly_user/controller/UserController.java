@@ -31,6 +31,9 @@ public class UserController extends HttpServlet {
             case "delete":
                 deleteUser(req, resp);
                 break;
+            case "text-transaction":
+                transaction(req, resp);
+                break;
             default:
                 showList(req, resp);
                 break;
@@ -63,7 +66,6 @@ public class UserController extends HttpServlet {
     }
 
 
-
     private void sortUsers(HttpServletRequest req, HttpServletResponse resp) {
         List<User> users = userService.softByUserName();
         req.setAttribute("users", users);
@@ -81,6 +83,16 @@ public class UserController extends HttpServlet {
         userService.deleteUser(id);
         resp.sendRedirect("/user");
 
+    }
+
+    private void transaction(HttpServletRequest req, HttpServletResponse resp) {
+        String mess = userService.insertUpdateUserTransaction();
+        try {
+            req.getSession().setAttribute("mess", mess);
+            resp.sendRedirect("/user");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -144,4 +156,6 @@ public class UserController extends HttpServlet {
         userService.updateUser(user);
         resp.sendRedirect("/user");
     }
+
+
 }
